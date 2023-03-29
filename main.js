@@ -15,6 +15,9 @@ function getUserChoice () {
         case ("scissors"):
             choice = 3;
             break;
+        case ("quit"):
+            choice = 0;
+            break;            
         default:
             console.log ("That's an invalid input! Please try again!")
             choice = getUserChoice()
@@ -52,6 +55,10 @@ function playGame (){
     let result = 0;
 
     let userChoice = getUserChoice();
+    // Terminate the program if the user choose "quit"
+    if (userChoice == 0){
+        return "quit";
+    }
     let computerChoice = getComputerChoice();
 
     console.log("Your choice is " + translate(userChoice));
@@ -99,6 +106,11 @@ function loop () {
         console.log ("Round", i);
 
         let result = playGame();
+        
+        // Terminate the program if the user choose to quit
+        if (result == "quit"){
+            return;
+        }
 
         if (result == 3) {
             userWinMatch += 1;
