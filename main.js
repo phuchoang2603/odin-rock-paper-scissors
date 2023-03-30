@@ -48,9 +48,9 @@ function translate (choice) {
     }
 }
 
-function playGame (){
+function playOneRound (){
     // Operate the individual round, return the result as:
-    // 0 -> Lose; 1 -> Tie; 3 -> Win
+    // Lose = 0, Tie = 1, Win = 3
     let output = "";
     let result = 0;
 
@@ -94,8 +94,7 @@ function getRound (){
     }
 }
 
-function loop () {
-    let round = getRound();
+function playGame (round) {
     let userWinMatch = 0;
     let computerWinMatch = 0;
     let currentWinning = "";
@@ -105,7 +104,7 @@ function loop () {
         i++;
         console.log ("Round", i);
 
-        let result = playGame();
+        let result = playOneRound();
         
         // Terminate the program if the user choose to quit
         if (result == "quit"){
@@ -143,8 +142,7 @@ function again () {
     let againResponse = prompt("Try again (y/n)? ");
     switch (againResponse){
         case ("y"):
-            loop();
-            again();
+            main();
             break;
         case ("n"):
             return;
@@ -155,5 +153,11 @@ function again () {
 }
 
 // Main Program
-loop();
-again();
+function main () {
+    console.log ("Welcome to Rock, Paper, Scissors game!");
+    let round = getRound();
+    playGame(round);
+    again();
+}
+
+main();
