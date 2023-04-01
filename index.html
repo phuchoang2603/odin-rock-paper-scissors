@@ -4,9 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
 </head>
 <body>
+    <header class="header center">
+        <div class="text heading">ROCK-PAPER-SCISSOS</div>
+    </header>
+
+    <div class="container grid wide">
+        <!-- Score -->
+        <div class="score">
+            <div class="score_total">
+                <div class="row">
+                    <div class="col l-2">
+                        <div class="total_human">
+                            <div class="text heading">Human</div>
+                            <div class="text">0</div>
+                        </div>                        
+                    </div>
+                    <div class="col l-2 l-o-8">
+                        <div class="total_computer">
+                            <div class="text heading">Computer</div>
+                            <div class="text">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="score_current">
+                <div class="row">
+                    <div class="col l-2">
+                        <div class="current_human selection_button">
+                            <span class="iconify" data-icon="fluent-emoji:white-question-mark" data-width="240" data-height="240"></span>
+                        </div>
+                    </div>
+                    <div class="col l-8">
+                        <div class="textBox">
+                            <div class="text heading">Choose your weapon</div>
+                            <div class="text">First to score 5 points wins the game</div>
+                        </div>
+                    </div>
+                    <div class="col l-2">
+                        <div class="current_computer selection_button">
+                            <span class="iconify" data-icon="fluent-emoji:white-question-mark" data-width="240" data-height="240"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Selection -->
+        <div class="userChoice">
+            <div class="row">
+                <div class="col l-o-2 l-2">
+                    <div class="selection_button">
+                        <span class="iconify" data-icon="fluent-emoji:raised-fist" data-width="240" data-height="240"></span>
+                    </div>                    
+                </div>
+                <div class="col l-o-1 l-2">
+                    <div class="selection_button">
+                        <span class="iconify" data-icon="fluent-emoji:raised-hand" data-width="240" data-height="240"></span>
+                    </div>                    
+                </div>
+                <div class="col l-o-1 l-2">
+                    <div class="selection_button">
+                        <span class="iconify" data-icon="fluent-emoji:victory-hand" data-width="240" data-height="240"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Again -->
+        <div class="again center">
+            <span class="iconify" data-icon="pajamas:retry" data-width="32" data-height="32"></span>
+            <div class="text">Play again</div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
