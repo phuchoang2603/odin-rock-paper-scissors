@@ -110,9 +110,3 @@ body {
   color: var(--color-tertiary);
   padding: 1.6rem 3.2rem;
 }
-
-.again:hover {
-  background-color: var(--color-tertiary);
-  color: var(--color-secondary);
-  cursor: pointer;
-}
