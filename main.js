@@ -1,61 +1,3 @@
-function playGame (round) {
-    let userWinMatch = 0;
-    let computerWinMatch = 0;
-    let currentWinning = "";
-    let i = 0;
-
-    while ((userWinMatch < round) && (computerWinMatch < round)){
-        i++;
-        console.log ("Round", i);
-
-        let result = playOneRound();
-        
-        // Terminate the program if the user choose to quit
-        if (result == "quit"){
-            return;
-        }
-
-        if (result == 3) {
-            userWinMatch += 1;
-        } else if (result == 0) {
-            computerWinMatch += 1;
-        } else {
-            continue;
-        }
-        
-        // Display the current score of the the game
-        currentWinning = (userWinMatch == computerWinMatch) ? "." : 
-        ((userWinMatch >= computerWinMatch) ? " in favor of you." : " in favor of the computer.");
-
-        console.log (
-            "The score currently is " +
-            userWinMatch + "-" +
-            computerWinMatch +
-            currentWinning
-        );
-    }
-
-    if (userWinMatch == round) {
-        console.log ("Yayyy! You slayed it !!!")
-    } else {
-        console.log ("Noooo! Just a little more ...")
-    }
-}
-
-function again () {
-    let againResponse = prompt("Try again (y/n)? ");
-    switch (againResponse){
-        case ("y"):
-            main();
-            break;
-        case ("n"):
-            return;
-        default:
-            console.log("Invalid response");
-            again();
-    }
-}
-
 function translate (choice) {
     // Convert choice in number format to Emoji
     function Translate (name, html) {
@@ -111,34 +53,34 @@ function displayComputerChoice () {
 }
 
 function playOneRound (userSelection, computerSelection){
-    // Operate the individual round, return the result as:
+    // Operate the individual round, return the points gained per round as:
     // Lose = 0, Tie = 1, Win = 3
     let heading = "";
     let paragraph = "";
-    let result = 0;
+    let point = 0;
     let userSelectionText = translate(userSelection).name;
     let computerSelectionText = translate(computerSelection).name;
     
     if (userSelection == computerSelection) {
         heading = "It's a tie";
         paragraph = "You both chose " + userSelectionText;
-        result = 1;
+        point = 1;
     } else if ((userSelection == 1 && computerSelection == 3) || 
     (userSelection == 2 && computerSelection == 1) || 
     (userSelection == 3 && computerSelection == 2)){
         heading = "You won!";
         paragraph = userSelectionText + " beats " + computerSelectionText;
-        result = 3;
+        point = 3;
     } else {
         heading = "You lost";
         paragraph = userSelectionText + " is beaten by " + computerSelectionText;
-        result = 0;
+        point = 0;
     }
 
     return {
         heading: heading,
         paragraph: paragraph,
-        result: result
+        point: point
     }
 }
 
@@ -152,15 +94,42 @@ function displayTextBox (heading, paragraph) {
 }
 
 // Main Program
-// Get userChoice element in DOM
+// Get elements in DOM
 const userChoices = document.querySelectorAll(".userChoice .selection_button");
+const totalHuman = document.querySelector(".total_human .number");
+const totalComputer = document.querySelector(".total_computer .number");
+const again = document.querySelector(".again");
+
+// Initialize variables
+let userWinMatch = 0;
+let computerWinMatch = 0;
 
 userChoices.forEach(function(button){
-    button.addEventListener("click", function(e){
+    button.addEventListener("click", function activeButton(e){
         let userSelection = displayUserChoice(e);
         let computerSelection = displayComputerChoice();
-
+        
         let resultObject = playOneRound(userSelection, computerSelection);
         displayTextBox(resultObject.heading, resultObject.paragraph);
+
+        // Update the score
+        if (resultObject.point == 3) {
+            userWinMatch += 1;
+        } else if (resultObject.point == 0) {
+            computerWinMatch += 1;
+        }
+
+        totalHuman.textContent = userWinMatch;
+        totalComputer.textContent = computerWinMatch;
+
+        // Check if the match is over
+        if (userWinMatch == 5) {
+            displayTextBox("You won the match!", "Congratulations! Wanna play again?");            
+
+        } else if (computerWinMatch == 5) {
+            displayTextBox("You lost the match!", "Better luck next time! Wanna play again?");            
+        }
     });
+
+
 })
