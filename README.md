@@ -1,26 +1,35 @@
-# Rock Paper Scissors - Non-GUI JavaScript Game
-This is a simple non-GUI game of Rock Paper Scissors built using JavaScript. It allows a player to compete against the computer in a classic game of Rock Paper Scissors.
+# Rock Paper Scissors Game (GUI-version)
+This is a simple Rock Paper Scissors game with a graphical user interface. The game allows a user to play against the computer for five rounds and displays the winner at the end of the game.
 
-## How to Play
-The game is played by choosing either Rock, Paper or Scissors. The computer will also make a random choice of either Rock, Paper or Scissors. The game will then determine the winner based on the following rules:
+## Installation
+To use the game, simply click the [link here](https://phuchoang2603.github.io/odin-rock-paper-scissors/) or clone the repository to your local machine. The game is built with **HTML, CSS, and JavaScript**, so you don't need to install any additional software or libraries. To view the **Figma design** of this game, click the [link here](https://www.figma.com/file/PtQIaUZgrolr8Kmej9Qz22/The-Odin-Project?node-id=0%3A1&t=lPKumMZn3xMCQAIH-1).
+
+## Usage
+To start the game, simply open the **index.html** file in your web browser. The game will automatically start and display the GUI with buttons for the user to select their choice of Rock, Paper, or Scissors. After the user has made their selection, the computer will make its selection and the winner of the round will be displayed on the screen. The game will continue for a total of five rounds, and the winner of the game will be displayed at the end.
+
+## Game Rules
+The rules of the game are simple:
+
 - Rock beats Scissors
 - Scissors beats Paper
 - Paper beats Rock
-The winner is declared and a score is kept. The game is played until a maximum score is reached.
 
-## Features
-This version of the game includes the following features:
-- Randomized computer player choice
-- User input validation to ensure only valid choices are entered
-- Game score tracking
-- Option to play multiple rounds until the user chooses to quit
+## GUI Design
+The GUI for the game consists of the following elements:
 
-## How to Run
-To run the game, simply download or clone the repository to your local machine and open the **main.js** file in your JavaScript environment. The game can be run in the command-line interface by navigating to the repository directory and typing node **main.js**.
+- Header with the title "Rock Paper Scissors" at the top
+- Score section, which displays the current score and the selections made by the user and computer in the previous round
+- User selection section, which displays buttons for the user to select Rock, Paper, or Scissors
+- Play again button, which allows the user to restart the game
+
+The GUI is responsive and designed to work on desktop, tablet, and mobile devices.
 
 ## Future Improvements
-Some possible future improvements to this game include:
-- Adding a GUI interface for improved user experience
-- Allowing the user to select the number of rounds to play
-- Adding a "best of" system for determining the overall winner of a series of rounds
-- Adding additional game modes or variations
+There are several improvements that could be made to the game, including:
+
+- Adding animations and sound effects to make the game more engaging
+- Allowing the user to choose the number of rounds they want to play
+- Adding a difficulty level for the computer opponent (e.g. easy, medium, hard)
+- Allowing the user to customize the GUI design and color scheme
+
+These improvements would make the game more enjoyable for users and provide additional challenges and options to keep the game interesting.
