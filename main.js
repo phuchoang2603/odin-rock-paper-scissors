@@ -1,99 +1,3 @@
-const prompt=require("prompt-sync")({sigint:true});
-
-function getUserChoice () {
-    // Ask user's input, convert to lowercase, and return output as number format
-    let choice = prompt("What's your choice? (rock/ paper/ scissors) ")
-    choice = choice.toLowerCase();
-    
-    switch (choice) {
-        case ("rock"):
-            choice = 1;
-            break;
-        case ("paper"):
-            choice = 2;
-            break;
-        case ("scissors"):
-            choice = 3;
-            break;
-        case ("quit"):
-            choice = 0;
-            break;            
-        default:
-            console.log ("That's an invalid input! Please try again!")
-            choice = getUserChoice()
-    }
-
-    return choice;
-}
-
-function getComputerChoice () {
-    // Generate a random number ranging from 1 to 3
-    let choice = 1 + Math.floor(Math.random() * 3);
-
-    return choice;
-}
-
-function translate (choice) {
-    // Convert number to rock/paper/scissors format
-    switch (choice){
-        case (1):
-            return "Rock";
-            break;
-        case (2):
-            return "Paper";
-            break;
-        case (3):
-            return "Scissors";
-            break;
-    }
-}
-
-function playOneRound (){
-    // Operate the individual round, return the result as:
-    // Lose = 0, Tie = 1, Win = 3
-    let output = "";
-    let result = 0;
-
-    let userChoice = getUserChoice();
-    // Terminate the program if the user choose "quit"
-    if (userChoice == 0){
-        return "quit";
-    }
-    let computerChoice = getComputerChoice();
-
-    console.log("Your choice is " + translate(userChoice));
-    console.log("The computer's choice is " + translate(computerChoice));
-    
-    if (userChoice == computerChoice) {
-        output = "Tie. Neither wins nor loses";
-        result = 1;
-    } else if ((userChoice == 1 && computerChoice == 3) || 
-    (userChoice == 2 && computerChoice == 1) || 
-    (userChoice == 3 && computerChoice == 2)){
-        output = "Congratulations. You win. " + 
-        translate(userChoice) + " beats " + translate(computerChoice);
-        result = 3;
-    } else {
-        output = "Defeated. You lose. " + 
-        translate(computerChoice) + " beats " + translate(userChoice);
-        result = 0;
-    }
-
-    console.log (output);
-    return result;
-}
-
-function getRound (){
-    let round = prompt("How many games you think you will win? ");
-
-    if (!isNaN(round)){
-        return round;
-    } else {
-        console.log("Invalid response");
-        return getRound();
-    }
-}
-
 function playGame (round) {
     let userWinMatch = 0;
     let computerWinMatch = 0;
@@ -152,12 +56,111 @@ function again () {
     }
 }
 
-// Main Program
-function main () {
-    console.log ("Welcome to Rock, Paper, Scissors game!");
-    let round = getRound();
-    playGame(round);
-    again();
+function translate (choice) {
+    // Convert choice in number format to Emoji
+    function Translate (name, html) {
+        this.name = name;
+        this.html = html;
+    }
+
+    let result = "";
+
+    switch (choice){
+        case (1):
+            result = new Translate("Rock", userChoices[0].innerHTML);
+            break;
+        case (2):
+            result = new Translate("Paper", userChoices[1].innerHTML);
+            break;
+        case (3):
+            result = new Translate("Scissors", userChoices[2].innerHTML);
+            break;
+    }
+
+    return result;
 }
 
-main();
+function displayUserChoice (e) {
+    // Display the user's choice in the DOM 
+    // and return the user's choice in number
+    const current_human = document.querySelector(".current_human");
+    const userSelection = e.currentTarget;
+    current_human.innerHTML = userSelection.innerHTML;
+
+    switch (userSelection.id){
+        case ("rock"):
+            return 1;
+            break;
+        case ("paper"):
+            return 2;
+            break;
+        case ("scissors"):
+            return 3;
+            break;
+    }
+}
+
+function displayComputerChoice () {
+    // Display the computer's choice in the DOM
+    // and return the computer's choice in number
+    const computerSelection = 1 + Math.floor(Math.random() * 3);
+    const current_computer = document.querySelector(".current_computer");
+
+    current_computer.innerHTML = translate(computerSelection).html;
+    return computerSelection;
+}
+
+function playOneRound (userSelection, computerSelection){
+    // Operate the individual round, return the result as:
+    // Lose = 0, Tie = 1, Win = 3
+    let heading = "";
+    let paragraph = "";
+    let result = 0;
+    let userSelectionText = translate(userSelection).name;
+    let computerSelectionText = translate(computerSelection).name;
+    
+    if (userSelection == computerSelection) {
+        heading = "It's a tie";
+        paragraph = "You both chose " + userSelectionText;
+        result = 1;
+    } else if ((userSelection == 1 && computerSelection == 3) || 
+    (userSelection == 2 && computerSelection == 1) || 
+    (userSelection == 3 && computerSelection == 2)){
+        heading = "You won!";
+        paragraph = userSelectionText + " beats " + computerSelectionText;
+        result = 3;
+    } else {
+        heading = "You lost";
+        paragraph = userSelectionText + " is beaten by " + computerSelectionText;
+        result = 0;
+    }
+
+    return {
+        heading: heading,
+        paragraph: paragraph,
+        result: result
+    }
+}
+
+function displayTextBox (heading, paragraph) {
+    // Display the result of the round in the DOM
+    const headingElement = document.querySelector(".textBox .heading");
+    const paragraphElement = document.querySelector(".textBox .paragraph");
+
+    headingElement.textContent = heading;
+    paragraphElement.textContent = paragraph;
+}
+
+// Main Program
+// Get userChoice element in DOM
+const userChoices = document.querySelectorAll(".userChoice .selection_button");
+
+userChoices.forEach(function(button){
+    button.addEventListener("click", function(e){
+        let userSelection = displayUserChoice(e);
+        let computerSelection = displayComputerChoice();
+
+        let resultObject = playOneRound(userSelection, computerSelection);
+        displayTextBox(resultObject.heading, resultObject.paragraph);
+    });
+})
