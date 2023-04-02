@@ -20,11 +20,13 @@ html {
     font-size: 62.5%;
     line-height: 1.6rem;
     font-family: 'Inter', sans-serif;
+    height: 100%;
 }
 
 body {
     background-color: var(--color-primary);
     color: var(--white);
+    height: 100%;
 }
 
 .center {
@@ -33,8 +35,16 @@ body {
     align-items: center;
 }
 
+.center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .text {
   font-size: var(--h0);
+  text-align: center;
 }
 
 .heading {
@@ -44,7 +54,7 @@ body {
 .selection_button{
   background-color: var(--color-secondary);
   aspect-ratio: 1/1;
-  padding: 3.2rem;
+  padding: 3.2em;
   width: 20rem;
   max-width: 100%;
   border-radius: 10%;
@@ -61,52 +71,67 @@ body {
 }
 
 /* Main CSS */
-
+/* CONTAINER */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
 /* HEADER */
 .header {
+  flex: 0 1 auto;
+  width: 100%;
   background-color: var(--color-secondary);
   padding: 3.2rem 0;
 }
 
-/* CONTAINER */
-/* score */
+/* CONTENT */
+.content {
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  gap: 6.4rem;
+}
+/* SCORE */
 .score {
-  margin: 3.2rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 /* score_total */
-.total_human .text:nth-child(2){
-  margin-top: 1.6rem;
+.score_total {
+  width: 100%;
+}
+
+.total_human{
   text-align: left;
 }
 
-.total_computer .text:nth-child(2){
-  margin-top: 1.6rem;
+.total_computer{
   text-align: right;
 }
 
 /* score_current */
 .textBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 3.2rem;
 }
 
-/* user selection */
+/* USERCHOICE */
 .userChoice {
-  margin: 6.4rem 0;
+  width: 100%;
 }
-/* again */
+/* AGAIN */
 .again {
-  margin: 3.2rem auto;
+  flex: 0 1 auto;
   width: fit-content;
+  margin: 6.4rem 0;
   gap: 1.6rem;
   background-color: var(--color-secondary);
   color: var(--color-tertiary);
-  padding: 1.6rem 3.2rem;
+  padding: 1.6em 3.2em;
+}
+
+.again:hover {
+  background-color: var(--color-tertiary);
+  color: var(--white);
+  cursor: pointer;
 }

@@ -1,0 +1,21 @@
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1239px) {
+  .text {
+    font-size: var(--h1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+  .text {
+    font-size: var(--h2);
+  }
+
+  .row .col:nth-child(2) {
+    order: 3
+  }
+
+  .textBox {
+    margin-top: 3.2rem;
+  }
+}
