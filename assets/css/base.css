@@ -106,15 +106,21 @@ body {
   width: 100%;
 }
 
-.total_human{
+.total_human .heading,
+.total_human .number {
   text-align: left;
 }
 
-.total_computer{
+.total_computer .heading,
+.total_computer .number {
   text-align: right;
 }
 
-/* score_current */
+.total_computer .number,
+.total_human .number {
+  margin-top: 0.8rem;
+}
+
 .textBox {
   gap: 3.2rem;
 }
